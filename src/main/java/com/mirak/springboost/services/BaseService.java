@@ -2,8 +2,8 @@ package com.mirak.springboost.services;
 
 import java.util.Collection;
 
-import com.mirak.springboost.serives.annotations.searchable.models.EntitySearchCriteria;
-import com.mirak.springboost.serives.annotations.searchable.models.SearchResponse;
+import com.mirak.springboost.annotations.searchable.models.EntitySearchCriteria;
+import com.mirak.springboost.annotations.searchable.models.SearchResponse;
 
 /**
  * 

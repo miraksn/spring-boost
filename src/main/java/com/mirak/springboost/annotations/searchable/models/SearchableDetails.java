@@ -1,6 +1,6 @@
-package com.mirak.springboost.serives.annotations.searchable.models;
+package com.mirak.springboost.annotations.searchable.models;
 
-import com.mirak.springboost.serives.annotations.searchable.enums.Type;
+import com.mirak.springboost.annotations.searchable.enums.Type;
 
 /**
  * 

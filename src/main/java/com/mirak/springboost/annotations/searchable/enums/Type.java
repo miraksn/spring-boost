@@ -1,4 +1,4 @@
-package com.mirak.springboost.serives.annotations.searchable.enums;
+package com.mirak.springboost.annotations.searchable.enums;
 
 /**
  * 

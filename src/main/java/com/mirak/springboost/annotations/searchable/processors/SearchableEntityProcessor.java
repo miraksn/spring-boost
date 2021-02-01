@@ -1,6 +1,6 @@
-package com.mirak.springboost.serives.annotations.searchable.processors;
+package com.mirak.springboost.annotations.searchable.processors;
 
-import com.mirak.springboost.serives.annotations.searchable.SearchableEntity;
+import com.mirak.springboost.annotations.searchable.SearchableEntity;
 
 /**
  * 

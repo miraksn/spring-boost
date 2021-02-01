@@ -3,9 +3,9 @@ package com.mirak.springboost.services.base;
 import java.util.Collection;
 
 import com.mirak.springboost.repositories.BaseRepository;
-import com.mirak.springboost.serives.annotations.searchable.models.EntitySearchCriteria;
-import com.mirak.springboost.serives.annotations.searchable.models.SearchResponse;
-import com.mirak.springboost.serives.annotations.searchable.processors.SearchableEntityProcessor;
+import com.mirak.springboost.annotations.searchable.models.EntitySearchCriteria;
+import com.mirak.springboost.annotations.searchable.models.SearchResponse;
+import com.mirak.springboost.annotations.searchable.processors.SearchableEntityProcessor;
 import com.mirak.springboost.services.BaseService;
 
 /**

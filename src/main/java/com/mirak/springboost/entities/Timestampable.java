@@ -16,8 +16,8 @@ import javax.persistence.PreUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mirak.springboost.serives.annotations.searchable.Searchable;
-import com.mirak.springboost.serives.annotations.searchable.enums.Type;
+import com.mirak.springboost.annotations.searchable.Searchable;
+import com.mirak.springboost.annotations.searchable.enums.Type;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package com.mirak.springboost.serives.annotations.searchable;
+package com.mirak.springboost.annotations.searchable;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -6,7 +6,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import com.mirak.springboost.serives.annotations.searchable.enums.Type;
+import com.mirak.springboost.annotations.searchable.enums.Type;
 
 /**
  * 

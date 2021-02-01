@@ -1,12 +1,12 @@
-package com.mirak.springboost.serives.annotations.searchable.processors;
+package com.mirak.springboost.annotations.searchable.processors;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mirak.springboost.serives.annotations.searchable.Searchable;
-import com.mirak.springboost.serives.annotations.searchable.enums.Type;
-import com.mirak.springboost.serives.annotations.searchable.models.SearchableDetails;
+import com.mirak.springboost.annotations.searchable.Searchable;
+import com.mirak.springboost.annotations.searchable.enums.Type;
+import com.mirak.springboost.annotations.searchable.models.SearchableDetails;
 
 /**
  * 

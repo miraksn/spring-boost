@@ -1,4 +1,4 @@
-package com.mirak.springboost.serives.annotations.searchable.models;
+package com.mirak.springboost.annotations.searchable.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
