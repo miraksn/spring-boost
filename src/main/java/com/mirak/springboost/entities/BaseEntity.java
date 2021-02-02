@@ -26,7 +26,7 @@ import com.mirak.springboost.annotations.searchable.enums.Type;
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class Timestampable implements Serializable {
+public class BaseEntity implements Serializable {
 
 	protected static final long serialVersionUID = 0000000000000000001L;
 
@@ -118,7 +118,7 @@ public class Timestampable implements Serializable {
 
     @Override
     public String toString() {
-        return "Timestampable{" +
+        return "BaseEntity{" +
                 "createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", uuid='" + uuid + '\'' +
@@ -129,7 +129,7 @@ public class Timestampable implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Timestampable that = (Timestampable) o;
+        BaseEntity that = (BaseEntity) o;
         return Objects.equals(createdAt, that.createdAt) &&
                 Objects.equals(updatedAt, that.updatedAt) &&
                 Objects.equals(uuid, that.uuid);
