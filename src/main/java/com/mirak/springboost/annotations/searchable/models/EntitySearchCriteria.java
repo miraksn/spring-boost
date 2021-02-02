@@ -1,8 +1,12 @@
 package com.mirak.springboost.annotations.searchable.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.mirak.springboost.specifications.models.SearchCriteria;
 
 /**
  * 
@@ -139,5 +143,43 @@ public class EntitySearchCriteria<T> implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
+	public static Collection<SearchCriteria> toSearchCriterias() {
+		Collection<SearchCriteria> searchCriterias = new ArrayList<SearchCriteria>();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return searchCriterias;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

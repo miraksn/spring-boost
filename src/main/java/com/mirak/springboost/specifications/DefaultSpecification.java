@@ -10,6 +10,8 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.util.Assert;
 
+import com.mirak.springboost.specifications.models.SearchCriteria;
+
 /**
  * 
  * @author karim SNOUSSI

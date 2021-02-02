@@ -1,4 +1,4 @@
-package com.mirak.springboost.specifications;
+package com.mirak.springboost.specifications.models;
 
 import com.mirak.springboost.specifications.enums.Operation;
 import com.mirak.springboost.specifications.enums.Operator;
