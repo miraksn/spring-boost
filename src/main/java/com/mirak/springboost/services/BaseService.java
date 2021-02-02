@@ -2,8 +2,8 @@ package com.mirak.springboost.services;
 
 import java.util.Collection;
 
-import com.mirak.springboost.annotations.searchable.models.EntitySearchCriteria;
 import com.mirak.springboost.annotations.searchable.models.SearchResponse;
+import com.mirak.springboost.specifications.models.SearchData;
 
 /**
  * 
@@ -24,7 +24,7 @@ public interface BaseService<T> {
 	void removeByUuid(String uuid);
 	void removeById(Long id);
 	void removeAll(Collection<T> entities);
-	default SearchResponse<T> search(EntitySearchCriteria<T> criteria) {
+	default SearchResponse<T> search(SearchData searchData) {
 		return new SearchResponse<T>();
-	};
+	}
 }

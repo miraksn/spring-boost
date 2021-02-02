@@ -7,6 +7,11 @@ import java.util.Map;
 
 import com.mirak.springboost.specifications.enums.SearchOperation;
 
+/**
+ * 
+ * @author karim SNOUSSI
+ *
+ */
 public class SearchModel {
 	private Map<String, SearchDetails> Search = new HashMap<String, SearchDetails>();
 	private List<SearchModel> Searchs = new ArrayList<>();

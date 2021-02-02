@@ -3,6 +3,11 @@ package com.mirak.springboost.specifications.models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author karim SNOUSSI
+ *
+ */
 public class SearchDetails {
 	private Object minValue;
 	private Object minValueOrEqual;

@@ -3,10 +3,10 @@ package com.mirak.springboost.services.base;
 import java.util.Collection;
 
 import com.mirak.springboost.repositories.BaseRepository;
-import com.mirak.springboost.annotations.searchable.models.EntitySearchCriteria;
 import com.mirak.springboost.annotations.searchable.models.SearchResponse;
 import com.mirak.springboost.annotations.searchable.processors.SearchableEntityProcessor;
 import com.mirak.springboost.services.BaseService;
+import com.mirak.springboost.specifications.models.SearchData;
 
 /**
  * 
@@ -73,7 +73,7 @@ public abstract class AbstractBaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	@Override
-	public SearchResponse<T> search(EntitySearchCriteria<T> criteria) {
+	public SearchResponse<T> search(SearchData searchData) {
 		try {
 			if (SearchableEntityProcessor.isSearchableEntity(typeTool.getClass())) {
 				
