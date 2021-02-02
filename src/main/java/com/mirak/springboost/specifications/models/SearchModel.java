@@ -2,8 +2,11 @@ package com.mirak.springboost.specifications.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.data.jpa.domain.Specification;
 
 import com.mirak.springboost.specifications.enums.SearchOperation;
 
@@ -13,36 +16,36 @@ import com.mirak.springboost.specifications.enums.SearchOperation;
  *
  */
 public class SearchModel {
-	private Map<String, SearchDetails> Search = new HashMap<String, SearchDetails>();
-	private List<SearchModel> Searchs = new ArrayList<>();
+	private Map<String, SearchDetails> search = new HashMap<String, SearchDetails>();
+	private List<SearchModel> searchs = new ArrayList<>();
 	private SearchOperation operation = SearchOperation.AND;
 
 	/**
 	 * @return the search
 	 */
 	public Map<String, SearchDetails> getSearch() {
-		return Search;
+		return search;
 	}
 
 	/**
 	 * @param search the search to set
 	 */
 	public void setSearch(Map<String, SearchDetails> search) {
-		Search = search;
+		this.search = search;
 	}
 
 	/**
 	 * @return the searchs
 	 */
 	public List<SearchModel> getSearchs() {
-		return Searchs;
+		return searchs;
 	}
 
 	/**
 	 * @param searchs the searchs to set
 	 */
 	public void setSearchs(List<SearchModel> searchs) {
-		Searchs = searchs;
+		this.searchs = searchs;
 	}
 
 	/**
@@ -57,6 +60,56 @@ public class SearchModel {
 	 */
 	public void setOperation(SearchOperation operation) {
 		this.operation = operation;
+	}
+
+	public <E> Specification<E> buildSpecification() {
+		Specification<E> spec = null;
+		if (!search.isEmpty()) {
+			List<String> attributes = new ArrayList<String>(search.keySet());
+			List<SearchCriteria> criterias = new ArrayList<SearchCriteria>();
+			attributes.forEach(attribute->{
+				criterias.addAll(search
+					.get(attributes.get(0))
+					.toSearchCriterias(attributes.get(0)));
+			});
+			spec = SearchModel.buildAndSpecification(criterias);
+		}
+		
+		if (searchs != null && !searchs.isEmpty()) {
+			switch (operation) {
+			case AND:
+				for (Iterator<SearchModel> iterator = searchs.iterator(); iterator.hasNext();) {
+					SearchModel searchModel = (SearchModel) iterator.next();
+					if (spec == null) {
+						spec = searchModel.buildSpecification();
+					} else {
+						spec = spec.and(searchModel.buildSpecification());
+					}
+				}
+				break;
+			case OR:
+				for (Iterator<SearchModel> iterator = searchs.iterator(); iterator.hasNext();) {
+					SearchModel searchModel = (SearchModel) iterator.next();
+					if (spec == null) {
+						spec = searchModel.buildSpecification();
+					} else {
+						spec = spec.or(searchModel.buildSpecification());
+					}
+				}
+				break;
+			default:
+				break;
+			}
+		}
+		return spec;
+	}
+	
+	private static <E> Specification<E> buildAndSpecification(List<SearchCriteria> criterias) {
+		if (criterias.isEmpty()) {
+			return null;
+		}
+		
+		return null;
 	}
 
 }

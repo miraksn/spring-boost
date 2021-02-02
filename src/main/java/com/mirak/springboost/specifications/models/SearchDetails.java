@@ -3,19 +3,24 @@ package com.mirak.springboost.specifications.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.util.Assert;
+
+import com.mirak.springboost.specifications.enums.Operation;
+import com.mirak.springboost.specifications.enums.Operator;
+
 /**
  * 
  * @author karim SNOUSSI
  *
  */
 public class SearchDetails {
-	private Object minValue;
-	private Object minValueOrEqual;
+	private Comparable<? extends Object> minValue;
+	private Comparable<? extends Object> minValueOrEqual;
 
-	private Object equalValue;
+	private Comparable<? extends Object> equalValue;
 
-	private Object maxValue;
-	private Object maxValueOrEqual;
+	private Comparable<? extends Object> maxValue;
+	private Comparable<? extends Object> maxValueOrEqual;
 
 	private String lessThanOrEqualTo;
 	private String lessThan;
@@ -28,82 +33,82 @@ public class SearchDetails {
 	private String likeValue;
 	private String like;
 
-	private Object containsValue;
+	private Comparable<? extends Object> containsValue;
 	private String contains;
 
 	private List<String> in = new ArrayList<String>();
-	private List<Object> inValues = new ArrayList<Object>();
+	private List<Comparable<? extends Object>> inValues = new ArrayList<Comparable<? extends Object>>();
 
 	public SearchDetails() {
 	}
-
+	
 	/**
 	 * @return the minValue
 	 */
-	public Object getMinValue() {
+	public Comparable<? extends Object> getMinValue() {
 		return minValue;
 	}
 
 	/**
 	 * @param minValue the minValue to set
 	 */
-	public void setMinValue(Object minValue) {
+	public void setMinValue(Comparable<? extends Object> minValue) {
 		this.minValue = minValue;
 	}
 
 	/**
 	 * @return the minValueOrEqual
 	 */
-	public Object getMinValueOrEqual() {
+	public Comparable<? extends Object> getMinValueOrEqual() {
 		return minValueOrEqual;
 	}
 
 	/**
 	 * @param minValueOrEqual the minValueOrEqual to set
 	 */
-	public void setMinValueOrEqual(Object minValueOrEqual) {
+	public void setMinValueOrEqual(Comparable<? extends Object> minValueOrEqual) {
 		this.minValueOrEqual = minValueOrEqual;
 	}
 
 	/**
 	 * @return the equalValue
 	 */
-	public Object getEqualValue() {
+	public Comparable<? extends Object> getEqualValue() {
 		return equalValue;
 	}
 
 	/**
 	 * @param equalValue the equalValue to set
 	 */
-	public void setEqualValue(Object equalValue) {
+	public void setEqualValue(Comparable<? extends Object> equalValue) {
 		this.equalValue = equalValue;
 	}
 
 	/**
 	 * @return the maxValue
 	 */
-	public Object getMaxValue() {
+	public Comparable<? extends Object> getMaxValue() {
 		return maxValue;
 	}
 
 	/**
 	 * @param maxValue the maxValue to set
 	 */
-	public void setMaxValue(Object maxValue) {
+	public void setMaxValue(Comparable<? extends Object> maxValue) {
 		this.maxValue = maxValue;
 	}
 
 	/**
 	 * @return the maxValueOrEqual
 	 */
-	public Object getMaxValueOrEqual() {
+	public Comparable<? extends Object> getMaxValueOrEqual() {
 		return maxValueOrEqual;
 	}
 
 	/**
 	 * @param maxValueOrEqual the maxValueOrEqual to set
 	 */
-	public void setMaxValueOrEqual(Object maxValueOrEqual) {
+	public void setMaxValueOrEqual(Comparable<? extends Object> maxValueOrEqual) {
 		this.maxValueOrEqual = maxValueOrEqual;
 	}
 
@@ -208,14 +213,14 @@ public class SearchDetails {
 	/**
 	 * @return the containsValue
 	 */
-	public Object getContainsValue() {
+	public Comparable<? extends Object> getContainsValue() {
 		return containsValue;
 	}
 
 	/**
 	 * @param containsValue the containsValue to set
 	 */
-	public void setContainsValue(Object containsValue) {
+	public void setContainsValue(Comparable<? extends Object> containsValue) {
 		this.containsValue = containsValue;
 	}
 
@@ -250,15 +255,94 @@ public class SearchDetails {
 	/**
 	 * @return the inValues
 	 */
-	public List<Object> getInValues() {
+	public List<Comparable<? extends Object>> getInValues() {
 		return inValues;
 	}
 
 	/**
 	 * @param inValues the inValues to set
 	 */
-	public void setInValues(List<Object> inValues) {
+	public void setInValues(List<Comparable<? extends Object>> inValues) {
 		this.inValues = inValues;
+	}
+
+	public List<SearchCriteria> toSearchCriterias(String attributeName) {
+		Assert.notNull(attributeName,"THE ATTRIBUTE NAME CAN NOT BE NULL");
+		Assert.isTrue(!attributeName.isEmpty(),"THE ATTRIBUTE NAME CAN NOT BE EMPTY");
+		List<SearchCriteria> criterias = new ArrayList<SearchCriteria>();
+		
+
+		if(minValue!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_VALUE,
+					Operator.MORE_THAN, attributeName, minValue));
+		}
+		
+		if(minValueOrEqual!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_VALUE,
+					Operator.EQUALS_OR_MORE_THAN, attributeName, minValueOrEqual));
+		}
+		
+		if(equalValue!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_VALUE,
+					Operator.EQUALS, attributeName, equalValue));
+		}
+		
+		if(maxValue!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_VALUE,
+					Operator.LESS_THAN, attributeName, maxValue));
+		}
+		
+		if(maxValueOrEqual!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_VALUE,
+					Operator.EQUALS_OR_LESS_THAN, attributeName, maxValueOrEqual));
+		}
+		
+		if(lessThanOrEqualTo!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_COLUMN,
+					Operator.EQUALS_OR_LESS_THAN, attributeName, lessThanOrEqualTo));
+		}
+		
+		if(lessThan!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_COLUMN,
+					Operator.LESS_THAN, attributeName, lessThan));
+		}
+		
+		if(equalTo!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_COLUMN,
+					Operator.EQUALS, attributeName, equalTo));
+		}
+		
+		if(moreThan!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_COLUMN,
+					Operator.MORE_THAN, attributeName, moreThan));
+		}
+		
+		if(moreThanOrEqualTo!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_COLUMN,
+					Operator.EQUALS_OR_MORE_THAN, attributeName, moreThanOrEqualTo));
+		}
+		
+		if(likeValue!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_VALUE,
+					Operator.LIKE, attributeName, likeValue));
+		}
+		
+		if(like!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_COLUMN,
+					Operator.MORE_THAN, attributeName, like));
+		}
+		
+		if(containsValue!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_VALUE,
+					Operator.CONTAINS, attributeName, containsValue));
+		}
+		
+		if(contains!=null) {
+			criterias.add(new SearchCriteria(Operation.COLUMN_TO_COLUMN,
+					Operator.CONTAINS, attributeName, contains));
+		}
+		
+		return criterias;
 	}
 
 }

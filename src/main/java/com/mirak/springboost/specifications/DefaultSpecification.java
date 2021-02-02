@@ -8,6 +8,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.Assert;
 
 import com.mirak.springboost.specifications.models.SearchCriteria;
@@ -17,8 +18,10 @@ import com.mirak.springboost.specifications.models.SearchCriteria;
  * @author karim SNOUSSI
  *
  */
-public abstract class DefaultSpecification<T> {
+public class DefaultSpecification<T> implements Specification<T>{
 
+	private static final long serialVersionUID = 1L;
+	
 	private final static String CRITERIA_NULL = "CRITERIA OBJECT CAN NOT BE NULL";
 	private final static String OPERATION_NULL = "OPERATION CAN NOT BE NULL";
 	private final static String OPERATOR_NULL = "OPERATOR CAN NOT BE NULL";
@@ -30,7 +33,7 @@ public abstract class DefaultSpecification<T> {
 	protected DefaultSpecification() {
 	}
 
-	protected DefaultSpecification(SearchCriteria criteria) {
+	public DefaultSpecification(SearchCriteria criteria) {
 		this.criteria = criteria;
 	}
 

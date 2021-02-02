@@ -78,5 +78,4 @@ public class SearchData {
 	public void setSearchData(SearchModel searchData) {
 		SearchData = searchData;
 	}
-
 }
