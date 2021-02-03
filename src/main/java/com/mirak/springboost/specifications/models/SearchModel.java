@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.mirak.springboost.specifications.DefaultSpecification;
 import com.mirak.springboost.specifications.enums.SearchOperation;
 
 /**
@@ -69,8 +70,8 @@ public class SearchModel {
 			List<SearchCriteria> criterias = new ArrayList<SearchCriteria>();
 			attributes.forEach(attribute->{
 				criterias.addAll(search
-					.get(attributes.get(0))
-					.toSearchCriterias(attributes.get(0)));
+					.get(attribute)
+					.toSearchCriterias(attribute));
 			});
 			spec = SearchModel.buildAndSpecification(criterias);
 		}
@@ -108,8 +109,16 @@ public class SearchModel {
 		if (criterias.isEmpty()) {
 			return null;
 		}
-		
-		return null;
+		Specification<E> spec = null;
+		for (Iterator<SearchCriteria> iterator = criterias.iterator(); iterator.hasNext();) {
+			SearchCriteria criteria = (SearchCriteria) iterator.next();
+			if (spec == null) {
+				spec = new DefaultSpecification<E>(criteria);
+			} else {
+				spec = spec.and(new DefaultSpecification<E>(criteria));
+			}
+		}
+		return spec;
 	}
 
 }
