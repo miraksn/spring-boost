@@ -2,9 +2,11 @@ package com.mirak.springboost.services.base;
 
 import java.util.Collection;
 
-import com.mirak.springboost.repositories.BaseRepository;
+import org.springframework.data.jpa.domain.Specification;
+
 import com.mirak.springboost.annotations.searchable.models.SearchResponse;
 import com.mirak.springboost.annotations.searchable.processors.SearchableEntityProcessor;
+import com.mirak.springboost.repositories.BaseRepository;
 import com.mirak.springboost.services.BaseService;
 import com.mirak.springboost.specifications.models.SearchData;
 
@@ -18,9 +20,14 @@ import com.mirak.springboost.specifications.models.SearchData;
  */
 public abstract class AbstractBaseServiceImpl<T> implements BaseService<T> {
 
+	protected Class<T> entityClass;
+	
 	protected BaseRepository<T> repository;
 	
-	private T typeTool;
+	public AbstractBaseServiceImpl(Class<T> entityClass) {
+		super();
+		this.entityClass = entityClass;
+	}
 	
 	@Override
 	public T findByUuid(String uuid) {
@@ -75,20 +82,24 @@ public abstract class AbstractBaseServiceImpl<T> implements BaseService<T> {
 	@Override
 	public SearchResponse<T> search(SearchData searchData) {
 		try {
-			if (SearchableEntityProcessor.isSearchableEntity(typeTool.getClass())) {
+			if (SearchableEntityProcessor.isSearchableEntity(entityClass.getClass())) {
+				Specification<T> spec = searchData.getSearchData().buildSpecification();
+				//Map<String, SearchableDetails> searchableDetails = SearchableProcessor.getSearchableMap(entityClass);
 				
+				//TODO Convert from search input to internal search data
 				
-				// TODO: do search
-				
-				
-				
+				SearchResponse<T> searchResult = new SearchResponse<T>(repository.findAll(spec, getPageable(
+						searchData.getPage(), searchData.getSize(), searchData.getSort(), searchData.getOrder())));
+				return searchResult;
+			} else {
+				return new SearchResponse<T>();
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 
-	
-		return new SearchResponse<T>();
+		} catch (Exception e) {
+			return new SearchResponse<T>();
+		}
 	}
+	
+	
 	
 }
