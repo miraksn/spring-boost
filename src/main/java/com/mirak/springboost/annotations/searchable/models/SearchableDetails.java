@@ -12,17 +12,19 @@ public final class SearchableDetails {
 	private String name;
 	private String targetName;
 	private Type type;
+	private Class<?> attributeClass;
 
 	/**
 	 * @param name
 	 * @param targetName
 	 * @param type
-	 * @param value
+	 * @param attributeClass
 	 */
-	public SearchableDetails(String name, String targetName, Type type) {
+	public SearchableDetails(String name, String targetName, Type type, Class<?> attributeClass) {
 		this.name = name;
 		this.targetName = targetName;
 		this.type = type;
+		this.attributeClass = attributeClass;
 	}
 
 	/**
@@ -67,4 +69,22 @@ public final class SearchableDetails {
 		this.type = type;
 	}
 
+	/**
+	 * @return the attributeClass
+	 */
+	public Class<?> getAttributeClass() {
+		return attributeClass;
+	}
+
+	/**
+	 * @param attributeClass the attributeClass to set
+	 */
+	public void setAttributeClass(Class<?> attributeClass) {
+		this.attributeClass = attributeClass;
+	}
+	
+	@Override
+	public SearchableDetails clone() {
+		return new SearchableDetails(name, targetName, type, attributeClass);
+	}
 }

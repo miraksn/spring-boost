@@ -21,6 +21,19 @@ public class SearchModel {
 	private List<SearchModel> searchs = new ArrayList<>();
 	private SearchOperation operation = SearchOperation.AND;
 
+	public SearchModel() {
+	}
+
+	public SearchModel(SearchOperation operation) {
+		this.operation = operation;
+	}
+
+	public SearchModel(Map<String, SearchDetails> search, List<SearchModel> searchs, SearchOperation operation) {
+		this.search = search;
+		this.searchs = searchs;
+		this.operation = operation;
+	}
+
 	/**
 	 * @return the search
 	 */
